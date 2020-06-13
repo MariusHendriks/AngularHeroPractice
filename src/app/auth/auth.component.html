@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()" novalidate>
+  username:
+  <input type="text" [formControl]="name" />
+
+  <p>Value: {{ name.value }}</p>
+
+  <input type="submit" />
+</form>
