@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Ability, AbilityBuilder } from '@casl/ability';
 
 @Injectable({
   providedIn: 'root',
@@ -7,13 +8,30 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   username: string;
 
+  constructor(private ability: Ability) {}
+
+  setUsername(username) {
+    this.username = username;
+    this.updateAbility(username);
+    console.log('New user name: ', username);
+  }
+
+  private updateAbility(username: string) {
+    const { can, rules } = new AbilityBuilder<Ability>();
+
+    if (username === 'test') {
+      can('manage', 'messages');
+    } else if (username === 'testerino') {
+      can('manage', 'all');
+    } else {
+      can('read', 'all');
+    }
+
+    this.ability.update(rules);
+  }
+
   getUsername(): string {
     console.log('this.username', this.username);
     return this.username;
   }
-  setUsername(username) {
-    this.username = username;
-    console.log('New user name: ', username);
-  }
-  constructor() {}
 }

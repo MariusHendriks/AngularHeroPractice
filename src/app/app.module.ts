@@ -13,8 +13,17 @@ import { AuthComponent } from './auth/auth.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AbilityModule } from '@casl/angular';
+import { Ability, PureAbility } from '@casl/ability';
+
 @NgModule({
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    AbilityModule,
+  ],
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -22,6 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeroDetailComponent,
     MessagesComponent,
     AuthComponent,
+  ],
+  providers: [
+    { provide: Ability, useValue: new Ability() },
+    { provide: PureAbility, useExisting: Ability },
   ],
   bootstrap: [AppComponent],
 })
