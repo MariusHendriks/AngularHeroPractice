@@ -19,9 +19,9 @@ export class AuthService {
   private updateAbility(username: string) {
     const { can, rules } = new AbilityBuilder<Ability>();
 
-    if (username === 'test') {
+    if (username === 'iCanClearMessages') {
       can('manage', 'messages');
-    } else if (username === 'testerino') {
+    } else if (username === 'admin') {
       can('manage', 'all');
     } else {
       can('read', 'all');
